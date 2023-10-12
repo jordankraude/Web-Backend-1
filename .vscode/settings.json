@@ -1,0 +1,16 @@
+{
+    "sqltools.connections": [
+        {
+            "pgOptions": {
+                "ssl": true
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "driver": "PostgreSQL",
+            "database": "cse340jk1103269$",
+            "username": "cse340jk1103269$",
+            "connectString": "postgres://cse340jk11032690:Hoxl2r0ST3DrexiHvdf44kauTvSTe80G@dpg-ckeam3ttj22c73ccc5o0-a.oregon-postgres.render.com/cse340jk11032690",
+            "name": "WDDPostGreSQL"
+        }
+    ]
+}
