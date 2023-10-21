@@ -12,7 +12,7 @@ body {
 #wrapper {background-color: white;
 width: 80vw;
 margin: auto auto;
-border: 5px solid #66101F;
+border: 5px solid #5ADAD4;
 border-radius: 20px;
 padding: 20px;
 height: auto;}
@@ -37,20 +37,34 @@ header {
   color: #8A8E91;
 }
 
-nav {background-color: #855A5C;
-height: 40px;
-margin-top: 40px;}
+nav {background-color: black;
+height: 50px;
+margin: auto auto;
+margin-top: 40px;
+width: 100%;}
 
 nav ul {display: flex;
 flex-direction:row;
-width: 100%;
+width: auto;
 justify-content: space-evenly;
 color: white;
 list-style-type: none;
-height: 100%;}
+height: 100%;
+margin-left: -10px;}
 nav ul li {
   margin: auto auto;
   font-size: 20px;
+}
+nav ul li a {
+  color: #5ADAD4;
+  text-decoration: none;
+}
+
+nav ul li a:hover{
+  color: white;
+}
+nav ul li a:active {
+  color: gray;
 }
 
 
@@ -85,14 +99,14 @@ margin-top: 40px;
 /* background: lightgray; */
 background: rgba(255, 255, 255, 0.6);
 padding: 20px;
-color: #66101F;}
-.floatingSection h1{color: #66101F;}
+color: #5ADAD4;}
+.floatingSection h1{color: #5ADAD4;}
 
 .floatingSection button {
   width: 80%;
   height: 50px;
   margin-left: 20px;
-  background-color: #66101F;
+  background-color: #5ADAD4;
   color: white;
   font-size: 100%;
 }
@@ -124,7 +138,7 @@ font-size: 30px;}
   grid-template-rows: 1fr 1fr;
 }
 .upgradesGrid div{
-  background-color: #855A5C;
+  background-color: #5ADAD4;
   margin: 10px 10px;
   text-align: center;
   padding-top: 20px;
@@ -153,6 +167,88 @@ footer {
   margin-top: 100px;
 }
 
+#inv-display {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  padding: 0;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+#inv-display li {
+  margin-bottom: .5em;
+  border: 3px black solid;
+  list-style-type: none;
+  text-align: center;
+  margin: 20px;
+  flex: 0 0 calc(33.33% - 20px);
+  aspect-ratio: 1/1.2;
+}
+
+#inv-display li a {
+  color: black;
+  font-size: 30px;
+}
+#inv-display li a:hover {
+  color:#5ADAD4
+}
+
+#inv-display li img {
+  height: 200px;
+  width: 200px;
+  padding: 20px;
+}
+
+#inv-display li a {
+  width: 100%;
+  height: 100%;
+}
+
+#inv-display li div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+#inv-title {
+  text-align: center;
+  font-size: xx-large;
+  margin-top: 30px;
+}
+
+
+#errCode{text-align: center;
+margin-top: 50px;}
+
+#errMessage{text-align: center;}
+
+
+/* 3.0 Vehicle Display */
+#vehicle-display{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+#vehicle-display-title{
+  text-align: center;
+  margin-top: 50px;
+}
+
+#vehicle-info{
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+
+
+
+
+
+
+
+
 
 
 
@@ -163,7 +259,37 @@ footer {
     font-size: 1em;
     margin-bottom: 60px;
   }
+
+
+#vehicle-display{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
+#vehicle-display-title{
+  text-align: center;
+  margin-top: 50px;
+}
+
+#vehicle-info{
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+}
+
+
+
+
+
+
+
+
+
+
+
 
 @media screen and (max-width: 640px) {
   .topDiv{
@@ -179,7 +305,19 @@ footer {
   footer {
     margin-top: 10px;
   }
-  nav {height: 80px;}
+  nav {height: 80px;
+    width: 100%;
+ }
+ nav ul {
+  justify-content: space-evenly;
+  justify-self: center;
+  margin-left: -20px;
+ }
+
+ nav ul li {
+  font-size: 14px;
+ }
+
 
   .topDiv img {
     width: 90%;
