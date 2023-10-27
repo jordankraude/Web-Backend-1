@@ -1,0 +1,24 @@
+<% if (title) { %>
+    <h1 id="managementView-title"><%= title %></h1>
+<% } %>
+
+
+
+<div class="flash-message-container">
+    <%- messages() %>
+</div>
+
+<div id="managerDisplay">
+    <a href="manager/new-classification">
+        <div class="managerTools">
+            <h1>New Classification</h1>
+        </div>
+    </a>
+    <a href="manager/new-inventory">
+        <div class="managerTools">
+            <h1>New Inventory</h1>
+        </div>
+    </a>
+</div>
+
+

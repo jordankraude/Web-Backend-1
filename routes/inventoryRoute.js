@@ -5,4 +5,6 @@ const utilities = require("../utilities/")
 
 router.get("/type/:classificationId", utilities.handleErrors(invController.buildByClassificationId));
 
+router.get("/detail/:vehicleId", utilities.handleErrors(invController.buildByVehicleId));
+
 module.exports = router;

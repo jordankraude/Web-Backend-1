@@ -12,9 +12,13 @@ const app = express()
 const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
 const errorController = require("./controllers/errorTestController")
+const accountRoute = require("./routes/accountRoute")
 const inventoryRoute = require("./routes/inventoryRoute")
-const vehicleRoute = require("./routes/vehicleRoute")
+const managerRoute = require("./routes/managementRoute")
 const utilities = require("./utilities/index")
+const session = require("express-session")
+const pool = require('./database/')
+const bodyParser = require("body-parser")
 
 /* ***********************
  * View Engine and Templates
@@ -24,6 +28,31 @@ app.use(expressLayouts)
 app.set("layout", "./layouts/layout")
 app.use(static)
 
+
+
+/* ***********************
+ * Middleware
+ * ************************/
+app.use(session({
+  store: new (require('connect-pg-simple')(session))({
+    createTableIfMissing: true,
+    pool,
+  }),
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true,
+  name: 'sessionId',
+}))
+
+// Express Messages Middleware
+app.use(require('connect-flash')())
+app.use(function(req, res, next){
+  res.locals.messages = require('express-messages')(req, res)
+  next()
+})
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 //Routes
 
 // app.get("/", function(req, res){
@@ -36,7 +65,16 @@ app.get('/trigger-error', utilities.handleErrors(errorController.simulate500Erro
 
 // Inventory routes
 app.use("/inv", utilities.handleErrors(inventoryRoute))
-app.use("/inv", utilities.handleErrors(vehicleRoute))
+
+// Account Routes
+app.use("/account", utilities.handleErrors(accountRoute))
+
+// Manager Routes
+app.use("/manager", utilities.handleErrors(managerRoute))
+
+
+
+
 
 
 

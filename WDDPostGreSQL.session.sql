@@ -1,2 +1,1 @@
-SELECT * FROM inventory
-WHERE inv_id = 1;
+SELECT * FROM account

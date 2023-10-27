@@ -24,6 +24,44 @@ Util.getNav = async function (req, res, next) {
   return list
 }
 
+Util.buildDropDown = async function (req, res, next) {
+  let data = await invModel.getClassifications();
+  let dropdown = "<select id='classification_id' name='classification_id' required>";
+  data.rows.forEach((row) => {
+    dropdown += "<option value='" + row.classification_id + "'>" + row.classification_name + "</option>";
+  });
+  dropdown += "</select><br><br>"; // Add the closing </select> tag
+  return dropdown;
+}
+
+
+
+Util.getManagerNav = async function(req, res, next){
+
+  let data = await invModel.getClassifications()
+  let list = "<ul id='managerNav'>"
+  list += '<li><a href="/" title="Home page">Home</a></li>'
+  data.rows.forEach((row) => {
+    list += "<li>"
+    list +=
+      '<a href="/inv/type/' +
+      row.classification_id +
+      '" title="See our inventory of ' +
+      row.classification_name +
+      ' vehicles">' +
+      row.classification_name +
+      "</a>"
+    list += "</li>"
+  })
+  list += "<li>"
+  list += '<a href="/manager">' +
+  'Admin Tools</a>'
+  list += "</li>"
+  list += "</ul>"
+
+  return list
+}
+
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 
