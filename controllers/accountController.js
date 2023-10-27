@@ -96,6 +96,7 @@ async function registerAccount(req, res) {
               accountName: account.account_firstname + " " + account.account_lastname,
 
             })
+            res.redirect("/manager?message=You're all logged in!")
           }
           else {
             req.flash(
