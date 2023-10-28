@@ -36,6 +36,7 @@ list-style-type: none;
   padding: 10px;
   /* You can style the list items further if needed */
   
+
 }
 .register-flash-errors {
   list-style-type: decimal;
@@ -307,7 +308,7 @@ footer {
   font-size: 30px;
 }
 #inv-display li a:hover {
-  color:#5ADAD4
+  color:#007BFF
 }
 #inv-display li a:active {
   color: gray;
