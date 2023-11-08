@@ -12,18 +12,19 @@ router.get("/register", utilities.handleErrors(accountController.buildRegistrati
 
 // }))
 
-router.post(
-    "/register",
-    regValidate.registationRules(),
-    regValidate.checkRegData,
-    utilities.handleErrors(accountController.registerAccount)
-  )
 // Process the login attempt
 router.post(
   "/login",
   regValidate.loginRules(),
   regValidate.checkLoginData,
   utilities.handleErrors(accountController.loginAccount)
+)
+
+router.post(
+  "/register",
+  regValidate.registationRules(),
+  regValidate.checkRegData,
+  utilities.handleErrors(accountController.registerAccount)
 )
 
 module.exports = router;

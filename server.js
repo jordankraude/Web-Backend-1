@@ -14,7 +14,7 @@ const baseController = require("./controllers/baseController")
 const errorController = require("./controllers/errorTestController")
 const accountRoute = require("./routes/accountRoute")
 const inventoryRoute = require("./routes/inventoryRoute")
-const managerRoute = require("./routes/managementRoute")
+// const managerRoute = require("./routes/managementRoute")
 const utilities = require("./utilities/index")
 const session = require("express-session")
 const pool = require('./database/')
@@ -70,7 +70,7 @@ app.use("/inv", utilities.handleErrors(inventoryRoute))
 app.use("/account", utilities.handleErrors(accountRoute))
 
 // Manager Routes
-app.use("/manager", utilities.handleErrors(managerRoute))
+// app.use("/manager", utilities.handleErrors(managerRoute))
 
 
 

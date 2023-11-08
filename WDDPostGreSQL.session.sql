@@ -1,2 +1,3 @@
 DELETE FROM classification
-WHERE classification_id > 6
+WHERE classification_id > 23
+

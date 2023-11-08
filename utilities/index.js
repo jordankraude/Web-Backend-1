@@ -54,7 +54,7 @@ Util.getManagerNav = async function(req, res, next){
     list += "</li>"
   })
   list += "<li>"
-  list += '<a href="/manager">' +
+  list += '<a href="/inv">' +
   'Admin Tools</a>'
   list += "</li>"
   list += "</ul>"

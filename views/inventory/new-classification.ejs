@@ -1,0 +1,27 @@
+<% if (title) { %>
+    <h1 id="newClassification-title"><%= title %></h1>
+<% } else {
+      res.redirect('/')
+    } %>
+
+
+<div class="flash-message-container">
+    <%- messages() %>
+</div>
+
+
+<% if (errors) { %>
+    <ul class="register-flash-errors">
+    <% errors.array().forEach(error => { %>
+        <li><%= error.msg %></li>
+    <%  }) %>
+    </ul>
+<% } %>
+
+
+
+<form id="classificationForm" action="/inv/new-classification" method="post">
+    <label for="form_classification_name">New Classification Name:</label>
+    <input type="text" id="form_classification_name" name="classification_name" required pattern="^[a-zA-Z0-9]+$" placeholder="No special characters or spaces"><br><br>
+    <input type="submit" value="Create New Classification">
+</form>

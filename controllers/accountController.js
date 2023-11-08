@@ -1,4 +1,6 @@
 const accountModel = require("../models/account-model")
+const classificationModel = require("../models/classification-model")
+const inventoryModel = require("../models/inventory-model")
 const utilities = require("../utilities/")
 const bcrypt = require("bcryptjs")
 
@@ -89,14 +91,15 @@ async function registerAccount(req, res) {
           )
           if (account.account_type === "Admin"){
             let nav = await utilities.getManagerNav()
-            res.status(201).render("management/management", {
+            res.locals.sessionName == account.acccount_name
+            res.status(201).render("inventory/management", {
               title: "Manager View",
               nav,
               errors: null,
               accountName: account.account_firstname + " " + account.account_lastname,
 
             })
-            res.redirect("/manager?message=You're all logged in!")
+            res.redirect("/inv?message=You're all logged in!")
           }
           else {
             req.flash(
@@ -123,6 +126,8 @@ async function registerAccount(req, res) {
           })
         }
       }
+  
+
     
   
   module.exports = { buildLogin, buildRegistration, registerAccount, loginAccount }
