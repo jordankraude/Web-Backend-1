@@ -73,18 +73,18 @@ validate.inventoryRules = () => {
         return true;
       }),
 
-    body("inv_image")
+      body("inv_image")
       .custom((value, { req }) => {
-        if (!alphanumericRegex.test(value) || value !== value.trim()) {
-          throw new Error("Please provide a valid image path with only letters and numbers.");
+        if (!value.startsWith("/images/vehicles/") || !/^[a-zA-Z0-9/-]+\.((jpg)|(png)|(jpeg)|(webp))$/.test(value) || /\s/.test(value)) {
+          throw new Error("Please provide a valid image path that starts with '/images/vehicles/' and ends with a valid image file extension (jpg, png, jpeg, webp), with no spaces, and allowing dashes.");
         }
         return true;
       }),
-
+    
     body("inv_thumbnail")
       .custom((value, { req }) => {
-        if (!alphanumericRegex.test(value) || value !== value.trim()) {
-          throw Error("Please provide a valid thumbnail image path with only letters and numbers.");
+        if (!value.startsWith("/images/vehicles/") || !/^[a-zA-Z0-9/-]+\.((jpg)|(png)|(jpeg)|(webp))$/.test(value) || /\s/.test(value)) {
+          throw new Error("Please provide a valid thumbnail image path that starts with '/images/vehicles/' and ends with a valid image file extension (jpg, png, jpeg, webp), with no spaces, and allowing dashes.");
         }
         return true;
       }),
