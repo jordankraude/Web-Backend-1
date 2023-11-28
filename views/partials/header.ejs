@@ -3,9 +3,18 @@
       <a href="/" title="Return to home page">CSE Motors</a>
     </span>
     <div id="tools">
-
-        <a title="Click to log in" href="/account/login">My Account</a>
-
+    <% if (loggedin === 1) { %>
+      <div style="display: flex; flex-direction: column; text-align: right;">
+        <a href="/account/profile" title="Account Management">Account Management</a>
+        <a href="/account/logout" title="Click to log out">Logout</a>
+      </div>
+    <% } else if (loggedin === undefined) { %>
+        <!-- Handle the case where there might be an issue with the JWT token -->
+        <a href="/account/login" title="Click to log in">My Account</a>
+    <% } else { %>
+        <!-- Handle the case where the user is not logged in -->
+        <a href="/account/login" title="Click to log in">My Account</a>
+    <% } %>
 
     </div>
 </header>

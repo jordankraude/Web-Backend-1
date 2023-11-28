@@ -124,7 +124,7 @@ validate.inventoryRules = () => {
 validate.checkInventoryData = async (req, res, next) => {
   const { inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id } = req.body;
   let errors = [];
-  let dropdown = await utilities.buildDropDown();
+  let dropdown = await utilities.buildDropDown(classification_id);
   errors = validationResult(req);
   if (!errors.isEmpty()) {
     let nav = await utilities.getManagerNav();
@@ -132,6 +132,36 @@ validate.checkInventoryData = async (req, res, next) => {
       errors,
       title: "New Inventory",
       nav,
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_miles,
+      inv_color,
+      classification_id,
+      dropdown,
+    });
+    return;
+  }
+  next();
+};
+
+
+validate.checkUpdateData = async (req, res, next) => {
+  const { inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id, inv_id } = req.body;
+  let errors = [];
+  let dropdown = await utilities.buildDropDown(classification_id);
+  errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getManagerNav();
+    res.render("./inventory/edit-inventory", {
+      errors,
+      title: "Edit " + inv_make + " " + inv_model,
+      nav,
+      inv_id,
       inv_make,
       inv_model,
       inv_year,

@@ -139,6 +139,7 @@ width: 100%;}
 
 
 nav ul {display: flex;
+  flex-wrap: wrap;
 flex-direction:row;
 width: auto;
 justify-content: space-evenly;
@@ -416,7 +417,7 @@ input[type="submit"]:hover {
   margin-top: 20px;
 }
 
-#loginForm, #registerForm, #inventoryForm, #classificationForm{
+#loginForm, #registerForm, #inventoryForm, #classificationForm, #passwordForm{
   background-color: black;
   color: white;
 }
@@ -424,7 +425,7 @@ input[type="submit"]:hover {
   max-width: 80%;
   margin-top: 50px;
 }
-#login-title, #register-title, #newClassification-title, #newInventory-title, #managementView-title {
+#login-title, #register-title, #newClassification-title, #newInventory-title, #managementView-title, #editInventory-title, .title {
   text-align: center;
   margin-top: 50px;
 }
@@ -474,8 +475,72 @@ input:required:invalid, input:focus:invalid {
   text-decoration: none;
  }
 
+ /* thead {
+  background-color: black;
+  color:#007BFF;
+ }
+ #inventoryDisplay > tbody > tr > td{
+  text-align: center;
+  font-size: large;
+ }
 
+td:nth-child(even){
+  background-color: #333333;
+  color:#007BFF;
+}
+td:nth-child(odd){
+  background-color: black;
+  color:#007BFF;
+}
+tr {
+  background-color: white;
+}
+ #inventoryDisplay > td{
+  text-align: center;
+ } */
+ #inventoryDisplay {
+  width: 100%;
+  border:#333333 1pt solid;
+  background-color: black;
+ }
 
+ td, th{
+  padding: 8pt;
+  background-color: white;
+  text-align: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: large;
+ }
+
+ thead td, thead th {
+  background-color: white;
+  border: none;
+ }
+
+ #accountInfo{
+  border: black solid 1pt;
+ }
+
+ #accountInfo h2{
+  margin-left: 10px;
+ }
+
+ #accountUpdateLink {
+  text-align: center;
+  font-size: x-large;
+ }
+ /* #accountInfo ul li {
+  ;
+ } */
+ #managerAccount {
+  text-align: center;
+  margin: auto auto;
+
+ }
+ #managerAccount h2 {
+  font-size: xx-large;
+  margin-top: 40px;
+ }
 
 
 
@@ -556,13 +621,14 @@ nav ul li a:active {
   footer {
     margin-top: 10px;
   }
-  nav {height: 80px;
+  nav {height: auto;
     width: 100%;
  }
  nav ul {
   justify-content: space-evenly;
   justify-self: center;
   margin-left: -30px;
+  margin-top: auto;
  }
 
 
@@ -602,8 +668,9 @@ nav ul li a:active {
   }
   
   nav ul li {
-    font-size: 12px;
-    margin-top: 30px;
+    font-size: 16px;
+    margin-top: 0px;
+    padding: 5px;
   }
 
   nav ul li a:hover{

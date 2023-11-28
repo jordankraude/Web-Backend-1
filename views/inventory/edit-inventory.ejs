@@ -1,5 +1,5 @@
 <% if (title) { %>
-    <h1 id="newInventory-title"><%= title %></h1>
+    <h1 id="editInventory-title"><%= title %></h1>
 <% } else {
       res.redirect('/')
     } %>
@@ -17,7 +17,7 @@
     </ul>
 <% } %>
 
-<form id="inventoryForm" action="/inv/new-inventory" method="post">
+<form id="inventoryForm" action="/inv/update" method="post">
     <label for="inv_make">Make:</label>
     <input type="text" id="inv_make" name="inv_make" required pattern="^[a-zA-Z0-9]+$" value="<%= locals.inv_make %>"><br><br>
 
@@ -47,10 +47,15 @@
 
     <label for="classification_id">Classification ID:</label>
 
-    <%- classificationSelect %>
+    <%- dropdown %>
 
     
     </select><br><br>
 
-    <input type="submit" value="Create New Inventory">
+    <input type="submit" value="Update Vehicle" disabled>
+    <input type="hidden" name="inv_id"
+    <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+    <% } %>>
 </form>
+
+<script src="../../js/inv-update.js"></script>

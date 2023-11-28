@@ -1,4 +1,6 @@
 const invModel = require("../models/inventory-model")
+const jwt = require("jsonwebtoken")
+require("dotenv").config()
 const Util = {}
 
 /* ************************
@@ -24,11 +26,19 @@ Util.getNav = async function (req, res, next) {
   return list
 }
 
-Util.buildDropDown = async function (req, res, next) {
+Util.buildDropDown = async function (classification_id = null) {
   let data = await invModel.getClassifications();
   let dropdown = "<select id='classification_id' name='classification_id' required>";
   data.rows.forEach((row) => {
-    dropdown += "<option value='" + row.classification_id + "'>" + row.classification_name + "</option>";
+    dropdown += "<option value='" + row.classification_id + "'" 
+    if (
+      classification_id != null &&
+      row.classification_id == classification_id
+    ){
+        dropdown += " selected "
+      }
+    dropdown += ">" + row.classification_name + "</option>";
+    
   });
   dropdown += "</select><br><br>"; // Add the closing </select> tag
   return dropdown;
@@ -125,5 +135,72 @@ Util.buildVehicleDisplay = async function(data){
   }
   return display
 }
+
+Util.checkJWTToken = (req, res, next) => {
+  res.locals.loggedin = 0
+  if (req.cookies.jwt) {
+   jwt.verify(
+    req.cookies.jwt,
+    process.env.ACCESS_TOKEN_SECRET,
+    function (err, accountData) {
+     if (err) {
+      req.flash("Please log in")
+      res.clearCookie("jwt")
+      return res.redirect("/account/login")
+     }
+     res.locals.accountData = accountData
+     res.locals.loggedin = 1
+     next()
+    })
+  } else {
+   next()
+  }
+ }
+
+ Util.checkAdminAccess = (req, res, next) => {
+  const accountData = res.locals.accountData;
+
+  console.log(accountData)
+  console.log(accountData.account_type)
+  console.log(accountData.jwt)
+  // Check if the user is logged in and has an account type
+  if (accountData && accountData.account_type) {
+    // Check if the account type is "Employee" or "Admin"
+    if (accountData.account_type == "Employee" || accountData.account_type == "Admin") {
+      // User has the required access, allow access to the next middleware or route
+      next();
+    } else {
+      // User does not have the required access, redirect to login with appropriate message
+      req.flash("error", "You do not have permission to access this resource.");
+      res.redirect("/account/login");
+    }
+  } else {
+    // User is not logged in, redirect to login with appropriate message
+    req.flash("error", "Please log in to access this resource.");
+    res.redirect("/account/login");
+  }
+};
+
+ Util.checkLogin = (req, res, next) => {
+  if (res.locals.loggedin) {
+    next()
+  } else {
+    req.flash("notice", "Please log in.")
+    return res.redirect("/account/login")
+  }
+ }
+ 
+ Util.loginStatus = (req, res, next) => {
+  if (res.locals.loggedin) {
+    let logout = "<a href='/logout'>Logout</a>"
+    return logout
+  } else {
+    let logout = '<a title="Click to log in" href="/account/login">My Account</a>'
+    return logout
+  }
+ }
+
+
+
 
 module.exports = Util
