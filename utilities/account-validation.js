@@ -73,22 +73,8 @@ validate.registationRules = () => {
       .trim()
       .isEmail()
       .normalizeEmail() // refer to validator.js docs
-      .withMessage("A valid email is required.")
-      // .custom(async (account_email, {req}) => {
-      // const account_id = req.body.account_id
-      // const account = await accountModel.getAccountById(account_id)
-      // // Check if submitted email is same as existing
-      // if (account_email != account.account_email) {
-      // // No - Check if email exists in table
-      //   const emailExists = await accountModel.checkExistingEmail(account_email)
-      // // Yes - throw error
-      // if (emailExists.count != 0) {
-      // throw new Error("Email exists. Please use a different email")
-      // }
-      // }
-      // }),
-      ,
-  
+      .withMessage("A valid email is required."),
+
       // password is required and must be strong password
       body("account_password")
         .trim()
@@ -120,7 +106,7 @@ validate.registationRules = () => {
     next()
   }
 
-  validate.accountInfoRules = () => {
+  validate.accountInfoRules = (req) => {
     return [
       // firstname is required and must be string
       body("account_firstname")
@@ -141,14 +127,18 @@ validate.registationRules = () => {
       .normalizeEmail()
       .withMessage("A valid email is required.")
       .custom(async (account_email, { req }) => {
-        const existingEmail = await accountModel.checkExistingEmail(account_email);
-    
-        // Assuming accountData is available in res.locals
-        // const currentAccountId = res.locals.accountData.account_id;
-        // && existingEmail.account_id !== currentAccountId
-    
-        if (existingEmail ) {
-          throw new Error("Email exists. Please try a different email");
+        const account_id = req.body.account_id
+        console.log(account_id)
+        const account = await accountModel.getAccountById(account_id)
+ // No - Check if email exists in table
+        if (account_email != account.account_email) {
+        const emailExists = await accountModel.checkExistingEmail(
+          account_email
+          )
+          // Yes - throw error
+        if (emailExists) {
+        throw new Error("Email exists. Please use a different email")
+        }
         }
       })
     ]

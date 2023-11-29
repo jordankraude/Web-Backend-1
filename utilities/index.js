@@ -159,10 +159,6 @@ Util.checkJWTToken = (req, res, next) => {
 
  Util.checkAdminAccess = (req, res, next) => {
   const accountData = res.locals.accountData;
-
-  console.log(accountData)
-  console.log(accountData.account_type)
-  console.log(accountData.jwt)
   // Check if the user is logged in and has an account type
   if (accountData && accountData.account_type) {
     // Check if the account type is "Employee" or "Admin"
